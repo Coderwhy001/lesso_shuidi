@@ -1,0 +1,2 @@
+<van-button square type="primary" block bind:click="navigateToAdd">新增数据</van-button>
+<van-button square type="primary" block bind:click="navigateToList">数据列表</van-button>
