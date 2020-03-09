@@ -17,6 +17,21 @@
         <div class="manage_tip">
           <p>elm后台管理系统</p>
         </div>
+        <!-- element-ui 表单 收集数据 -->
+        <el-form :model="loginForm" :rules="rules">
+          <el-form-item prop="username">
+            <el-input v-model="loginForm.username" placeholder="用户名">
+              <span>dsa</span>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input v-model="loginForm.pass" placeholder="密码" type="password">
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
+          </el-form-item>
+        </el-form>
       </section>
     </transition>
   </div>
@@ -25,7 +40,22 @@
 export default {
   data() {
     return {
-      showLogin: false
+      showLogin: false,
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      rules: {
+        username: [
+          { require: true, message: '请输入用户名', trigger:'blur'}
+        ],
+        // 渐进式
+        password: [
+          {
+            require: true, message: '请输入密码', trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   mounted() {
