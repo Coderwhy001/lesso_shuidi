@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .active {
-            color: red;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
-        <h2 class="title" :class="getClasses()">{{message}}</h2>
-        <button @click="btnclick">按钮</button>
+        <h2 class="title" :class="[active, line]">{{message}}</h2>
+        <h2 class="title" :class="getClass()">{{message}}</h2>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -21,16 +16,12 @@
         el: '#app',
         data: {
             message: '你好啊',
-            active: 'active',
-            isActive: true,
-            isLine: true
+            active: 'aaa',
+            line: 'bbb'
         },
         methods: {
-            btnclick: function () {
-                this.isActive = !this.isActive
-            },
-            getClasses: function () {
-                return {active: this.isActive, line: this.isLine}
+            getClass: function () {
+                return [this.active, this.line]
             }
         }
     })

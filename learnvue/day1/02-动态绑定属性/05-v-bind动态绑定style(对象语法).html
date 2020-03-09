@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .active {
-            color: red;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
-        <h2 class="title" :class="getClasses()">{{message}}</h2>
-        <button @click="btnclick">按钮</button>
+        <!-- 50px必须加上单引号，否则会当做变量解析 -->
+        <!-- <h2 :style="{fontSize: '50px'}">{{message}}</h2> -->
+        <h2 :style="{fontSize: finalSize + 'px', color: finalColor}">{{message}}</h2>
+        <h2 :style="getstyle()">{{message}}</h2>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -21,16 +18,14 @@
         el: '#app',
         data: {
             message: '你好啊',
-            active: 'active',
-            isActive: true,
-            isLine: true
+            finalSize: 100,
+            finalColor: 'red',
         },
         methods: {
-            btnclick: function () {
-                this.isActive = !this.isActive
-            },
-            getClasses: function () {
-                return {active: this.isActive, line: this.isLine}
+            getstyle () {
+                return {
+                    fontSize: this.finalSize + 'px', color: this.finalColor
+                }
             }
         }
     })

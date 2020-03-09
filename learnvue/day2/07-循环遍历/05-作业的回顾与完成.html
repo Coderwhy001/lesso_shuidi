@@ -5,33 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .active {
-            color: red;
+        .active{
+            color: red
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <h2 class="title" :class="getClasses()">{{message}}</h2>
-        <button @click="btnclick">按钮</button>
+        <ul :class="{active: currentIndex === index}" v-for="(item, index) in movies" @click="change(index)">
+            <li>{{item}}</li>
+        </ul>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     const app = new Vue({
         el: '#app',
         data: {
-            message: '你好啊',
-            active: 'active',
-            isActive: true,
-            isLine: true
+            currentIndex: 0,
+            movies: ['海王', '海尔兄弟', '火影忍者', '进击的巨人'],
+            isactive: false
         },
         methods: {
-            btnclick: function () {
-                this.isActive = !this.isActive
-            },
-            getClasses: function () {
-                return {active: this.isActive, line: this.isLine}
+            change (index) {
+                this.currentIndex = index
+                console.log(this.currentIndex)
             }
+            
         }
     })
 </script>
