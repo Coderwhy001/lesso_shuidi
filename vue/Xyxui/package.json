@@ -1,0 +1,29 @@
+{
+  "name": "Xyxui",
+  "version": "0.1.0",
+  "private": false,
+  "description": "设计的第一个vue 开发框架",
+  "keywords": [
+    "component",
+    "vue",
+    "vue-component"
+  ],
+  "homepage": "https://github.com/2268849815",
+  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name yixuanui --dest lib packages/index.js",
+    "main": "lib/yixuanui.umd.min.js"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11",
+    "yixuanui": "^0.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.2.0",
+    "@vue/cli-service": "~4.2.0",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
