@@ -1,60 +1,61 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@/api/index.js'
+
 Vue.use(Vuex)
-// 单一状态树
+// 单一状态树  单一?  树？
 export default new Vuex.Store({
   state: {
     users: [
       // {
-      //     "address": {
-      //       "city": "Los Angeles",
-      //       "state": 'california',
-      //       "poncode": "123"
-      //     },
-      //     "tags": [
-      //       "music",
-      //       "blogs",
-      //       "cricket"
-      //     ],
-      //     "name": "Tom Benzamin"
+      //   "address": {
+      //     "city": "Los Angeles",
+      //     "state": 'California',
+      //     "pincode": "123"
       //   },
-      //   {
-      //     "address": {
-      //       "city": "抚州",
-      //       "state": '江西',
-      //       "poncode": "33100"
-      //     },
-      //     "tags": [
-      //       "coding",
-      //       "blogs"
-      //     ],
-      //     "name": "肖仡轩"
+      //   "tags": [
+      //     "music",
+      //     "blogs",
+      //     "cricket"
+      //   ],
+      //   "name": "Tom Benzamin"
+      // },
+      // {
+      //   "address": {
+      //     "city": "赣州",
+      //     "state": '江西',
+      //     "pincode": "331000"
       //   },
-      //   {
-      //     "address": {
-      //       "city": "九江",
-      //       "state": '江西',
-      //       "poncode": "33100"
-      //     },
-      //     "tags": [
-      //       "coding",
-      //       "blogs"
-      //     ],
-      //     "name": "刘子民"
+      //   "tags": [
+      //     "coding",
+      //     "blogs"
+      //   ],
+      //   "name": "王志浩"
+      // },
+      // {
+      //   "address": {
+      //     "city": "九江",
+      //     "state": '江西',
+      //     "pincode": "331000"
       //   },
-      //   {
-      //     "address": {
-      //       "city": "赣州",
-      //       "state": '江西',
-      //       "poncode": "33100"
-      //     },
-      //     "tags": [
-      //       "coding",
-      //       "games"
-      //     ],
-      //     "name": "衷从海"
-      //   }
+      //   "tags": [
+      //     "coding",
+      //     "swim"
+      //   ],
+      //   "name": "刘子民"
+      // },
+      //  {
+      //   "address": {
+      //     "city": "赣州",
+      //     "state": '江西',
+      //     "pincode": "331000"
+      //   },
+      //   "tags": [
+      //     "coding",
+      //     "games"
+      //   ],
+      //   "name": "衷从海"
+      // }
     ]
   },
   mutations: {
@@ -63,21 +64,28 @@ export default new Vuex.Store({
     }
   },
   actions: { // 写入状态的第一步
-    fetchUser(context) {
+    // 更api 通信的地方`
+    fetchUsers(context) {
       api
-      .fetchUser((users) => {
-        console.log(users);
-        // 写入state，严格一些 写一个条子 流程来
-        context.commit('setUsers', users)
-      })
+        .fetchUsers((users)=> {
+          // console.log(users);
+          // 写入state,   严格一些 写一个条子 流程来
+          context.commit('setUsers', users)
+        })
     },
+    queryTag(context, evt) {
+      console.log(arguments);
+      const tag = evt.target.value;
+      // console.log(tag);
+      api
+        .fetchUsersByTag(tag, (users) => {
+          context.commit('setUsers', users)
+        })
+    }
   },
   getters: {  // state computed 函数
-    getUsers(state) {
-      return state.users.map(user => {
-        user.id = user.address.poncode 
-        return user
-      })
+    getUsers(state) { // vuex 会给getters  state  读操作
+      return state.users
     }
   },
   modules: {
