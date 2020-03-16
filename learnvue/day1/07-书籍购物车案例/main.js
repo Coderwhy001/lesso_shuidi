@@ -58,10 +58,22 @@ const app = new Vue({
       //   sum += this.books[i].price * this.books[i].count
       // }
       // return sum
-      let sum = 0
-      for (let item of this.books) {
+      // let sum = 0
+      // for (let item of this.books) {
         
-      }
+      // }
+      // return this.books.reduce(function (preValue, book) {
+      //   return preValue + book.price * book.count
+      // },0)
+      return this.books.reduce((preValue, book) => {
+        return preValue + book.price * book.count
+      }, 0)
     }
-  }
+  },
+
+
 })
+
+const nums = [10, 20, 111, 222, 444, 40, 50]
+let total = nums.filter(n => n < 100).map(n => n *2).reduce((prevent, n ) => prevent + n);
+console.log(total);
