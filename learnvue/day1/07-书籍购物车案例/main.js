@@ -52,8 +52,15 @@ const app = new Vue({
       //    sum += this.books[i].price * this.books[i].count
       // }
       // return sum
-      for (let i in books) {
-        console.log(i)
+      // let sum = 0
+      // for (let i in this.books) {
+        
+      //   sum += this.books[i].price * this.books[i].count
+      // }
+      // return sum
+      let sum = 0
+      for (let item of this.books) {
+        
       }
     }
   }
