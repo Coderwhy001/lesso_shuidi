@@ -17,8 +17,9 @@
 </script> -->
 <template id="cpn">
   <div>
-    <h2>{{title}}</h2>
-    <p>我是内容，呵呵呵</p>
+    <h2>当前计数： {{counter}}</h2>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
   </div>
 </template>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -27,7 +28,15 @@
     template: '#cpn',
     data() {
       return {
-        title: 'abc'
+        counter: 0// 组件的data必须是函数 因为函数下的组件之间不会互相影响， 而对象会互相影响
+      }
+    },
+    methods: {
+      increment() {
+        this.counter++;
+      },
+      decrement() {
+        this.counter--
       }
     }
   })

@@ -7,34 +7,33 @@
 </head>
 <body>
     <div id="app">
-        <cpn></cpn>
+      <cpn :cmessage="message">123</cpn>
     </div>
-<!-- <script type="text/x-template" id="cpn">
-  <div>
-    <h2>我是标题</h2>
-    <p>我是内容，哈哈哈</p>
-  </div>
-</script> -->
-<template id="cpn">
-  <div>
-    <h2>{{title}}</h2>
-    <p>我是内容，呵呵呵</p>
-  </div>
-</template>
+    <template id="cpn">
+      <div>
+        <p>{{cmessage}}</p>
+        <p></p>
+      </div>
+    </template>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-  Vue.component('cpn', {
+  const cpn = {
     template: '#cpn',
-    data() {
-      return {
-        title: 'abc'
+    // props: ['cmessage']
+    props: {
+      cmessage: {
+        type: String,
+        default: 'aaa'//如果没有传值 将给默认值
       }
     }
-  })
+  }
   const app = new Vue({
       el: '#app',
       data: {
           message: '你好啊',
+      },
+      components: {
+        cpn
       }
   })
 </script>
