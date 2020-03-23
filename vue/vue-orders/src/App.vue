@@ -1,111 +1,137 @@
 <template>
-  <div id="app" align="center">
+  <div id="app">
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div> -->
-    <!-- <router-view/> -->
+    </div>
+    <router-view/> -->
     <h1>订单管理</h1>
-    
-    <el-table v-loading="listLoading" :data="list">
-      <el-table-column label="ID" prop="_id" align="center" width="80">
+    <!-- el-form   -->
+    <el-table
+      v-loading="listLoading"
+      :data="list">
+      <el-table-column label="ID" 
+      prop="_id"
+      align="center"
+      width="80">
         <template slot-scope="{row}">
-          <span class="red">{{row._id}}</span>
+          <span>{{row._id}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Name" prop="name" align="center" width="200">
+      <el-table-column label="Name" 
+      prop="name"
+      align="center"
+      width="200">
         <template slot-scope="{row}">
           <span>{{row.name}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="OrderDate" prop="orderDate" align="center" width="500">
+      <el-table-column label="OrderDate" 
+      prop="orderDate"
+      align="center"
+      width="400">
         <template slot-scope="{row}">
           <span>{{row.orderDate}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" prop="status" align="center" width="100">
+      <el-table-column label="状态" 
+      prop="status"
+      align="center"
+      width="100">
         <template slot-scope="{row}">
           <span>{{row.status}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="邮费" prop="shoppingFee" align="center" width="100">
+      <el-table-column label="邮费" 
+      prop="shippingFee"
+      align="center"
+      width="100">
         <template slot-scope="{row}">
-          <span>{{row.shoppingFee}}</span>
+          <span>{{row.shippingFee}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="单价" prop="total" align="center" width="100">
+      <el-table-column label="单价" 
+      prop="total"
+      align="center"
+      width="100">
         <template slot-scope="{row}">
           <span>{{row.total}}</span>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination :current-page.sync="page" :total="total" :pageSize="limit" layout="total, prev, pager, next"
-                    @current-change="handleCurrentChange">
-
+    <el-pagination
+      :current-page.sync="page"
+      :total="total"
+      :pageSize="limit"
+      layout="total, prev, pager, next"
+      @current-change="handleCurrentChange">
     </el-pagination>
   </div>
 </template>
 
 <style>
-/* .red{
+.red {
   color: red;
-} */
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
 </style>
 <script>
-import Axios from 'axios'
+import Axios from 'axios';
 export default {
   data() {
     return {
       page: 1,
-      total: 100,
+      total: 0,
       limit: 20,
-      listLoading: true,//加载数据中
+      listLoading: true, //加载数据中
       list: [
-        {
-          "_id": '121212',
-          "name": "肖仡轩1",
-          "orderDate": new Date(),
-          "status": "completed",
-          "shoppingFee": 0.5,
-          "total": 10.1
-        },
-        {
-          "_id": '121212',
-          "name": "肖仡轩2",
-          "orderDate": new Date(),
-          "status": "canceled",
-          "shoppingFee": 1.5,
-          "total": 20.1
-        },
-        {
-          "_id": '121212',
-          "name": "肖仡轩3",
-          "orderDate": new Date(),
-          "status": "created",
-          "shoppingFee": 2.5,
-          "total": 30.1
-        }
       ]
     }
   },
-  methods: {
-    handleCurrentChange() {
-
-    }
-  },
   mounted() {
-    Axios.post('/api/orders', {
+    // setTimeout(() => {
+    //   this.listLoading = false
+    // }, 1000)
+    Axios.get('/api/orders', {
       params: {
-
+        limit: this.limit,
+        page: this.page
       }
     })
     .then(res => {
-      // console.log(res);
-      this.list = res.data.orders
+      console.log(res);
+      this.list = res.data.result
+      this.total = res.data.total
       setTimeout(() => {
-      this.listLoading = false
-    }, 1000)
+        this.listLoading = false
+      }, 1000)
     })
+    
+  },
+  methods: {
+    handleCurrentChange(page) {
+      console.log(page);
+    }
   }
 }
 </script>
