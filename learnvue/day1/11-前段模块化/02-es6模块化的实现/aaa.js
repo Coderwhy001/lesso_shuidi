@@ -21,3 +21,14 @@ export function mul(num1, num2) {
   return num1 + num2
 }
 
+export class Person {
+  run() {
+    console.log('run')
+  }
+}
+const address = '北京市'
+// export default address
+
+export default function (argument) {
+  console.log(argument)
+}

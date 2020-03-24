@@ -7,6 +7,16 @@ if (flag) {
 import {num1, height} from './aaa.js'
 console.log(num1)
 
-import {mul} from './aaa.js'
+import {mul, Person} from './aaa.js'
 
 console.log(mul(20, 3))
+
+const p = new Person()
+p.run()
+
+import addr from "./aaa.js"
+addr('nb')
+
+import * as aaa from './aaa.js' // 统一导入
+
+console.log(aaa.flag)
