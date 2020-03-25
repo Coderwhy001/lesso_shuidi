@@ -36,6 +36,7 @@ Mock.mock(new RegExp('/vue-element-admin/article/list'), 'get', (config) => {
   // console.log(page, limit)
   let mockList = list.filter(item => {
     if (title && item.title.indexOf(title) < 0) return false;
+    // if (author && item.author.index(author) < 0) return false;
     return true;
   });
   const pageList = list.filter((item, index) => index < limit *page && index >= limit *(page-1));
