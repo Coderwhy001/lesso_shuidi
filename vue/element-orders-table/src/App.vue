@@ -6,8 +6,11 @@
     </div> -->
     <!-- <router-view/> -->
     <div>
-      <el-input v-model="listQuery.title" placeholder="Title" style="width:200px" class="filter-item" @keyup.enter.native="getList">
+      <el-input v-model="listQuery.title" placeholder="Title" style="width:200px" class="filter-item" @keyup.enter.native="getList(listQuery.title)">
       </el-input>
+      <el-input v-model="listQuery.author" placeholder="author" style="width:200px" class="filter-item" @keyup.enter.native="getList">
+      </el-input>
+
     </div>
     <el-table :data="list">
       <el-table-column label="ID" prop="id" align="center" width="80">
@@ -15,6 +18,11 @@
       <el-table-column label="Title" prop="title" align="center" width="300">
         <template slot-scope="{row}">
           <span class="link-type">{{row.title}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Author" prop="author" align="center" width="300">
+        <template slot-scope="{row}">
+          <span class="link-type">{{row.author}}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -58,6 +66,7 @@ export default {
         // console.log(response)
         this.list = response.data.list
         this.total = response.data.total
+        console.log(this.listQuery)
       })
     }
   }
