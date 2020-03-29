@@ -19,8 +19,18 @@ module.exports = {
                 loader: "css-loader" // translates CSS into CommonJS
             }, {
                 loader: "less-loader", // compiles Less to CSS
-                name: 'img/[name].[hash:8].[ext]'//改变图片打包路劲和名字
+                // name: 'img/[name].[hash:8].[ext]'//改变图片打包路劲和名字
             }]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015']
+          }
+        }
       }
     ]
   }
