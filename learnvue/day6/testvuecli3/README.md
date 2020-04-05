@@ -1,19 +1,5 @@
-# testvuecli3
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 改变url不刷新页面的两种方式
+history.pushState({}, '', 'url')
+location.hash('url')
+history.replaceState({}, '', 'url')
+history.back() = history.go(-1)
