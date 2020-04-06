@@ -11,7 +11,7 @@ const HomeNews = () => import('../components/HomeNews')
 const HomeMessage = () => import('../components/HomeMessage')
 const About = () => import('../components/About')
 const User = () => import('../components/User')// 懒加载
-
+const Profile = () => import('../components/Profile')
 const routes = [
   {
     path: '/',
@@ -20,11 +20,14 @@ const routes = [
   {
     path: '/home',
     component: Home,
+    meta: {
+      title: '首页'
+    },
     children: [
-      {
-        path: '/',
-        redirect: 'news'
-      },
+      // {
+      //   path: '/',
+      //   redirect: 'news'
+      // },
       {
         path: 'news',
         component: HomeNews
@@ -37,16 +40,37 @@ const routes = [
   },
   {
     path: '/about',
-    component: About
+    component: About,
+    meta: {
+      title: '关于'
+    },
   },
   {
     path: '/user/:userId',
-    component: User
+    component: User,
+    meta: {
+      title: '用户'
+    },
+  },
+  {
+    path: '/profile',
+    component: Profile,
+    meta: {
+      title: '档案'
+    },
   }
 ]
 const router = new VueRouter({
   routes,
   mode: 'history'
 })
+router.beforeEach((to, from, next) => { // 前置路由守卫
+  document.title = to.matched[0].meta.title
+  next()
+})
 
+// 后置钩子(hook)
+router.afterEach((to, from) => {
+  
+})
 export default router
