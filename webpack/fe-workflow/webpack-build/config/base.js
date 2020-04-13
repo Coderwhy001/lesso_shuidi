@@ -1,14 +1,13 @@
-// 函数
 module.exports = (config, resolve) => {
-  // console.log('在这里做基本配置吧')
+  // 运行函数   闭包
   return () => {
-    config 
+    config
     .entry('app')
-      .add(resolve('src/main.js'))// 项目的根目录
+      .add(resolve('src/main.js'))
       .end()
     .set('mode', process.env.NODE_ENV)
     .output
       .path(resolve('dist'))
-      .filename('[name].bundle.js')
+      .filename('[name].bundle.js');
   }
 }
