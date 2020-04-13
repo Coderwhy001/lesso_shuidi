@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img{
+      margin-top: 1500px;
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <img src="default.png" data-src="https://img.alicdn.com/bao/uploaded/i1/380485590/TB1pHlvXW285uJjSZFkXXbHopXa_!!0-item_pic.jpg_200x200q90.jpg_.webp" alt="">
+<script>
+  const observer = new IntersectionObserver(function (entry) {
+    // console.log(entry)
+    entry.forEach(node => {
+      if(node.isIntersecting){
+        const datasrc = node.target.getAttribute('data-src');
+        node.target.src = datasrc
+      }
+    })
+  },{
+    // root,  指定某个元素为根元素
+    // rootMargin: '0px 0px 100px 0px',  //使用类似于设置CSS边距的语法来指定根边距（根元素的观察影响范围）
+    threshold:[0.3] //阈值
+  })
+  const img = document.querySelector('img');
+  observer.observe(img)
+
+  
+</script>
+</body>
+</html>
