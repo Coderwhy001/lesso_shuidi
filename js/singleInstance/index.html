@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .modal {
+      position: fixed;
+      top: 0;left: 0;bottom: 0;right: 0;
+      background-color: rgba(0, 0, 0, .1);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let instance = null
+    function Modal() {
+        this.ele = document.createElement('div');
+        this.ele.classList.add('modal')
+        if (!instance) {
+          instance = this;
+        }
+        return instance
+      }
+      Modal.prototype.open = function () {
+        document.body.appendChild(this.ele)
+        this.ele.style.display = 'block'
+      }
+      Modal.prototype.content = function() {
+        this.ele.innerHTML = content
+      }
+      Modal.prototype.close = function() {
+        document.body.removeChild(this.ele)
+      }
+    let m =new Modal();
+    m.open()
+    m.content('内容')
+    setTimeout(() => {
+      m.close()
+    }, 3000)
+  </script>
+</body>
+</html>
