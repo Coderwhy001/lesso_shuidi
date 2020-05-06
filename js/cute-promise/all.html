@@ -1,0 +1,22 @@
+<script>
+  Promise.myAll = function(promises) {
+    return new Promise((resolve, reject) => {
+      let res = []
+      let count = 0
+      for(let i = 0; i < promise.length; i++) {
+        promises[i].then(x => {
+          res[i] = x
+          count++;
+          if (count === promises.length) {
+            resolve(res)
+          }
+        })
+        .catch(err => {
+          reject(err)
+        })
+      }
+    })
+  }
+
+  Promise.myAll([p1,p2,p3])
+</script>
