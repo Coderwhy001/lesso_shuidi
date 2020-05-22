@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <h2>hello world</h2>
+  </div>
+  <script>
+    var events = require('events')
+    const {ipcRenderer} = require('electron')
+    console.log(ipcRenderer instanceof events.EventEmitter)
+    // node 异步事件循环机制的实现
+    // mes_name mes_obj
+    ipcRenderer.send('greet', {
+      message: 'hello main'
+    })
+    ipcRenderer.on('greet', (event, args) => {
+      console.log(args)
+    })
+  </script>
+</body>
+</html>
