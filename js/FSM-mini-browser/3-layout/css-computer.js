@@ -1,28 +1,39 @@
 const css = require('css');
+const fs = require('fs');
 const match = require('./match');
+const layout = require('./layout');
+const render = require('./render');
+const images =  require('images');
+
 let htmlStr = `<html>
- <head>
-   <style>
-   body div #myid {
-    width: 100px;
-    background-color: #fff;
-  }
-  .text {
-    color: #888;
-  }
-  span {
-    font-size: 30px;
-  }
-   </style>
- </head>
- <body>
-    <div>
-      123
-      <div id="myid">
-        <span class="text" ></span>
-      </div>
+<head>
+    <style>
+    #myid{
+      width:500px;
+      display: flex;
+      background-color: rgb(0, 0, 255);
+      align-items: center;
+      justify-content: center;
+      height: 500px;
+    }
+    .main {
+      width: 200px;
+      height: 100px;
+      background-color: rgb(255, 0, 0);
+    }
+    .side {
+      width: 200px;
+      height: 200px;
+      background-color: rgb(0, 255, 0);
+    }
+    </style>
+</head>
+<body>
+    <div id="myid">
+      <div class="main"></div>
+      <div class="side"></div>
     </div>
- </body>
+</body>
 </html>
 `;
 // 词法分析：
@@ -198,7 +209,12 @@ function endTagOpen(c) {
   }
 }
 
-// console.log(JSON.stringify(stack, null, 2));
+let dom = stack[0];
+const viewport = images(800, 600);
+render(viewport, dom);
+viewport.save('render.jpg');
+
+fs.writeFileSync('./dom.json', JSON.stringify(stack, null, 2))
 function emit(token) {
   console.log(token);
   let top = stack[stack.length - 1];
@@ -217,11 +233,14 @@ function emit(token) {
     currentTextNode = null;
   } else if (token.tag === 'endTag') {
     if (top.tagName === token.tagName) {
-      stack.pop();
+      
       currentTextNode = null;
       if (top.tagName === 'style') {
         addCSSrule(top.children[0].content);
       }
+      // layout 这一步 依赖子元素信息
+      layout(top);
+      stack.pop();
     } else {
       throw new Error('no match');
     }
