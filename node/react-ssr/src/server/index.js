@@ -1,17 +1,30 @@
+// commonjs es
 import express from 'express';
-import React from 'react'
+import React from 'react';
+// client dom 
+// 谁提供：虚拟 DOM
+import { StaticRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import { renderToString } from 'react-dom/server';
-import Header from '../components/Header.jsx';
+import Routes from '../Routes';
+
 
 const app = express();
-
-// static 目录做了静态资源的
+// static 目录做了静态资源的一个映射
+// koa-static
 app.use(express.static('static'))
-//处理所有路由
+// ejs jsp jade vue-template:  if for 
 app.get('*', (req, res) => {
-  //入口组件
-  const App = (<Header/>)
-  const htmlStr = renderToString(App)
+  console.log(req.url);
+  // 入口组件 jsx 
+  const App = (
+    <StaticRouter location={req.url}>
+      { renderRoutes(Routes) }
+    </StaticRouter>
+  );
+  // jsx -> babel -> React.createElement()
+  const htmlStr = renderToString(App);
+  console.log(htmlStr);
   res.send(`<!DOCTYPE html>
   <html lang="en">
   <head>
