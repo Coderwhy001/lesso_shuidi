@@ -2,7 +2,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const config = require('./webpack.base.js');
 
-
 const clientConfig = {
   mode: 'development',
   entry: './src/client/index.js',
@@ -11,6 +10,5 @@ const clientConfig = {
     path: path.resolve(__dirname, 'static')
   },
 };
-
 
 module.exports = merge(config, clientConfig);

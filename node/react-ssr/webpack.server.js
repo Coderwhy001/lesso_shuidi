@@ -3,7 +3,6 @@ const nodeExternals = require('webpack-node-externals');
 const merge = require('webpack-merge');
 const config = require('./webpack.base.js');
 
-
 const serverConfig = {
   target: 'node',
   mode: 'development',
@@ -14,6 +13,5 @@ const serverConfig = {
   },
   externals: [nodeExternals()]
 }
-
 
 module.exports = merge(config, serverConfig)
