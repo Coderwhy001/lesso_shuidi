@@ -71,3 +71,47 @@ axios().then(() => {
 - 兼顾html生成
 - 兼顾请求发送，请求完毕是不是拿到一堆 JSON 数据，服务端会把 JSON 数据告诉前端，为什么要告诉前端，因为这个请求我在服务端已经请求完毕了，你可以直接用数据了，
 
+
+
+## 页面上的数据
+ajax 请求回来的，
+
+现在：静态jsx，变成html，
+依赖于 ajax 结果的那部分内容仍需靠 js构成生成出来
+
+目标：认为落地的页面内容（包括依赖ajax 结果的那部分内容），应该由后端直接生成返回（直接带有数据的页面）
+
+
+## 
+
+```js
+commentList.map()
+```
+生成 renderToString，没有li，我们 render 的时候，commentList = [], 
+
+
+renderToString 之前 commentList 有数据
+
+commentList 的数据哪里来：前端请求回来，之后更新了 redux 里面的数据。
+
+
+请求放到后端，后端请求完之后，
+
+
+
+localhost:3000/   后端生成一份 store，renderToString， commentList = [], ajax 那部分页面没有 html，
+前端 js 运行，前端也生成了一份 store，didMount 我们，dispatch(action), ajax, js 把那部分页面
+
+
+如果在 renderToString 之前我们已经保证了 commentList 我们已经请求回来数据了：
+
+
+1. 请求发生后端
+2. 请求回来了，保证后端的store commentList 有数据，然后再renderToString()
+
+
+怎么请求发生后端：要请求，我们只要 dispatch 一下 就行了，在哪里 dispatch呢（约定）
+约定：当前页面依赖的请求，我会放到 一个 静态属性上面
+
+loadData 里面放置我们当前组件依赖的 ajax 数据
+组件很多的，要把所有的组件依赖的数据都请求？当前访问的页面的组件

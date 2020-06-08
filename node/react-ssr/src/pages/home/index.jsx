@@ -3,15 +3,23 @@ import { connect } from 'react-redux';
 import { getCommentList } from '../../store/actions/homeAction.js';
 
 class Home extends React.Component {
+  
+  // 难道他不在后端运行到吗？
   componentDidMount() {
+    // 浏览器
+    // 放心大胆 使用
     const { getCommentList } = this.props
     getCommentList();
   }
   render() {
-    const { commentList} = this.props;
+    const { commentList } = this.props;
+    // commentList = DB
+    console.log('Home render');
     return (
       <div>
         Home
+        {/* 接口请求会，js 动态构造出来的 jsx 不能变为用户直接可用 html 的 */}
+        {/*  */}
         {
           commentList.map((e, index) => {
             return (
@@ -24,6 +32,10 @@ class Home extends React.Component {
       </div>
     )
   }
+}
+Home.loadData = (dispatch) => {
+  // 后端发起 dispatch，dispatch 完了之后，请求发出去了，reducer store
+  return dispatch(getCommentList()) // 得到一个 Promise
 }
 const mapStateToProps = (state) => {
   const { commentList } = state.home;
