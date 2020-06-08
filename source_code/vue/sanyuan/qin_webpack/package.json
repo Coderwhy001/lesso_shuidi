@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "parcel": "^1.12.4"
+  },
+  "name": "qin_webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
