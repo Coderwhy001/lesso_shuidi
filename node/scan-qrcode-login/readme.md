@@ -3,4 +3,4 @@
 3. 扫码 得到qrcodeId 
 4. 手机端登录状态 
 - 注册 -》 登录 jwt  用户名密码等生成token
-5. 手机端扫码 走进服务端 token被解析成用户名等用户数据 qrcodeId 跟token结合 ， 
+5. 手机端扫码 走进服务端 token被解析成用户名等用户数据 qrcodeId 跟token结合 

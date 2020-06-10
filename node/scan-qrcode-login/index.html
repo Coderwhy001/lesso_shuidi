@@ -50,7 +50,7 @@
     checkQRCode()
       .then(data => {
         const qrcodeData = data.data;
-        // console.log(data)
+        console.log(qrcodeData)
         if (qrcodeData.success) {
           console.log('登录授权成功, 跳转中....');
           clearInterval(interval)
@@ -67,7 +67,7 @@
 
 
         
-        // console.log(data);
+        console.log(data);
       })
   }, 3000)
 
